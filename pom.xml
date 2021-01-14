@@ -12,7 +12,7 @@
 	<groupId>br.medeiros.guilherme</groupId>
 	<artifactId>teste-south</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>teste-south</name>
+	<name>assembleia-api</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
@@ -41,10 +41,10 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-rest</artifactId>
 		</dependency>
-<!--		<dependency>-->
-<!--			<groupId>org.liquibase</groupId>-->
-<!--			<artifactId>liquibase-core</artifactId>-->
-<!--		</dependency>-->
+		<dependency>
+			<groupId>org.liquibase</groupId>
+			<artifactId>liquibase-core</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

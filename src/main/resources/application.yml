@@ -3,9 +3,7 @@ server:
   port: 8080
 
 spring:
-  application.name: refinancing-api
-  cloud.config.fail-fast: true
-
+  application.name: assembleia-api
 
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
@@ -21,4 +19,4 @@ spring:
 management:
   endpoint:
     liquibase:
-      enabled: false
+      enabled: true
