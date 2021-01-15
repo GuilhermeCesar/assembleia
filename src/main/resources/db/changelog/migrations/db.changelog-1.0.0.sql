@@ -12,6 +12,7 @@ CREATE TABLE assembleia.sessao(
   id int NOT NULL AUTO_INCREMENT,
   data_inicio DATETIME,
   duracao TIME,
+  pauta VARCHAR(100),
   PRIMARY KEY (id)
 );
 

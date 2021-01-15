@@ -3,9 +3,8 @@ package br.medeiros.guilherme.testesouth.entity;
 import lombok.*;
 
 import javax.persistence.*;
-
-import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -22,9 +21,12 @@ public class Sessao {
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
+    @Column(name = "pauta")
+    private String pauta;
+
     @Column(name = "data_inicio")
     private LocalDateTime dataInicio;
 
     @Column(name = "duracao")
-    private Duration duracao;
+    private LocalTime duracao;
 }
