@@ -1,6 +1,7 @@
 package br.medeiros.guilherme.testesouth.resource.v1;
 
 import br.medeiros.guilherme.testesouth.config.SwaggerConfig;
+import br.medeiros.guilherme.testesouth.dto.AssociadoDTO;
 import br.medeiros.guilherme.testesouth.dto.CadastrarSessaoDTO;
 import br.medeiros.guilherme.testesouth.dto.ErrorMessage;
 import br.medeiros.guilherme.testesouth.dto.SessaoDTO;
@@ -10,6 +11,8 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 import static org.springframework.http.HttpStatus.CREATED;
+import static org.springframework.http.HttpStatus.OK;
 
 @Validated
 @RequiredArgsConstructor
@@ -41,6 +45,14 @@ public class SessaoResource {
     @GetMapping(path = "{idSessao}")
     public SessaoDTO get(@PathVariable("idSessao") Long idSessao){
         return this.sessaoService.obterSessao(idSessao);
+    }
+
+    @GetMapping(path = "/buscar")
+    @ApiOperation(value = "Filtra associados", response = Page.class)
+    @ResponseStatus(OK)
+    public Page<SessaoDTO> findBy(@RequestParam(value = "pauta", required = false) String pauta,
+                                     Pageable pageable) {
+        return this.sessaoService.buscarSessao(pauta, pageable);
     }
 
 }
