@@ -3,7 +3,6 @@ package br.medeiros.guilherme.testesouth.service;
 import br.medeiros.guilherme.testesouth.exception.SessaoException;
 import br.medeiros.guilherme.testesouth.helper.MessageHelper;
 import br.medeiros.guilherme.testesouth.repository.SessaoRepository;
-import br.medeiros.guilherme.testesouth.service.SessaoService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,8 +12,6 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 
-import java.time.Duration;
-import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
@@ -39,10 +36,5 @@ class SessaoServiceTest {
 
         var error = Assertions.assertThrows(SessaoException.class, () -> this.refinancingCreateService.obterSessao(idSessao));
         Assertions.assertEquals(HttpStatus.NOT_FOUND, error.getStatus());
-    }
-
-    @Test
-    void inserirPauta(){
-
     }
 }
