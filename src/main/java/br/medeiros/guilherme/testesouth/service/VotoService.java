@@ -16,6 +16,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @Slf4j
@@ -28,7 +30,6 @@ public class VotoService {
     private final AssociadoRepository associadoRepository;
     private final MessageHelper messageHelper;
 
-
     public VotoFinalizadoDTO votar(Long idSessao, VotoDTO votoDTO) {
         final var sessao = this.sessaoRepository.findById(idSessao)
                 .orElseThrow(() -> new VotoException(NOT_FOUND, this.messageHelper.get(MessageHelper.ErrorCode.SESSAO_NAO_ENCONTRADA)));
@@ -36,40 +37,39 @@ public class VotoService {
         final var associado = this.associadoRepository.findById(votoDTO.getIdAssociado())
                 .orElseThrow(() -> new VotoException(NOT_FOUND, "Associado não encontrado"));
 
-        validarSeJaVotou(sessao, associado);
+        validarSeVotacao(sessao, associado);
 
         final var voto = Voto.builder()
                 .associadoId(associado.getId())
                 .sessaoId(sessao.getId())
                 .aprovado(votoDTO.getVoto())
                 .build();
-
         this.votoRepository.save(voto);
         var votoFinalizadoDTO = contagemDeVotos(sessao);
 
         return votoFinalizadoDTO
                 .withPauta(sessao.getPauta())
                 .withVotoAssociado(voto.getAprovado())
+                .withSessaoId(sessao.getId())
                 .withIdAssociado(associado.getId());
     }
 
-
-    public VotoFinalizadoDTO contagemDeVotos(Sessao sessao){
-        var votos  = this.votoRepository.contaVotacao(sessao.getId());
+    public VotoFinalizadoDTO contagemDeVotos(Sessao sessao) {
+        var votos = this.votoRepository.contaVotacao(sessao.getId());
 
         final var quantidadeSim = votos
                 .stream()
                 .filter(ContagemVotacaoDTO::getAprovado)
                 .mapToLong(ContagemVotacaoDTO::getQuantidade)
                 .findAny()
-                .getAsLong();
+                .orElse(0);
 
         final var quantidadeNao = votos
                 .stream()
                 .filter(contaVotos -> !contaVotos.getAprovado())
                 .mapToLong(ContagemVotacaoDTO::getQuantidade)
                 .findAny()
-                .getAsLong();
+                .orElse(0);
 
         return VotoFinalizadoDTO.builder()
                 .contagemSim(quantidadeSim)
@@ -77,12 +77,16 @@ public class VotoService {
                 .build();
     }
 
-    private void validarSeJaVotou(br.medeiros.guilherme.testesouth.entity.Sessao sessao, br.medeiros.guilherme.testesouth.entity.Associado associado) {
+    private void validarSeVotacao(br.medeiros.guilherme.testesouth.entity.Sessao sessao, br.medeiros.guilherme.testesouth.entity.Associado associado) {
         final var votoId = VotoId
                 .builder()
                 .associadoId(associado.getId())
                 .sessaoId(sessao.getId())
                 .build();
+
+        if (LocalDateTime.now().isAfter(sessao.getFinalSessao())) {
+            throw new VotoException(HttpStatus.INTERNAL_SERVER_ERROR, "Sessão finalizada");
+        }
 
         this.votoRepository.findById(votoId)
                 .ifPresent(votoSalvo -> {

@@ -26,13 +26,13 @@ public class SessaoService {
     private final SessaoRepository sessaoRepository;
     private final MessageHelper messageHelper;
 
-    public SessaoDTO criarSessao(final CadastrarSessaoDTO sessaoDTO) {
+    public SessaoDTO criarSessao(final CadastrarSessaoDTO cadastrarSessaoDTO) {
         try {
             final var sessao = Sessao
                     .builder()
-                    .dataInicio(sessaoDTO.getInicio())
-                    .duracao(sessaoDTO.getDuracao())
-                    .pauta(sessaoDTO.getPauta())
+                    .dataInicio(cadastrarSessaoDTO.getInicio())
+                    .duracao(cadastrarSessaoDTO.getDuracao())
+                    .pauta(cadastrarSessaoDTO.getPauta())
                     .build();
 
             this.sessaoRepository.save(sessao);

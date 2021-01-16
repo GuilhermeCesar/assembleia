@@ -24,14 +24,24 @@ public class CadastrarSessaoDTO {
     @NotNull
     LocalDateTime inicio;
     @ApiModelProperty(example = "10:10:10", value = "HH:mm:ss")
-    LocalTime duracao = LocalTime.of(0, 1);
+    LocalTime duracao;
 
     @JsonPOJOBuilder(withPrefix = "")
     public static class JacksonBuilder {
         LocalDateTime inicio;
+        LocalTime duracao;
 
-        public JacksonBuilder inicio(String dataCompra) {
-            this.inicio = DateDeserializer.localDateTime(dataCompra);
+        public JacksonBuilder() {
+            this.duracao = LocalTime.of(0, 1);
+        }
+
+        public JacksonBuilder inicio(String inicio) {
+            this.inicio = DateDeserializer.localDateTime(inicio);
+            return this;
+        }
+
+        public JacksonBuilder duracao(String duracao) {
+            this.duracao = DateDeserializer.localTime(duracao);
             return this;
         }
     }
