@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 
+
 @Data
 @Entity
 @Builder
@@ -12,6 +13,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Table(name = "voto")
 @IdClass(VotoId.class)
+@ToString
 public class Voto {
 
     @Id

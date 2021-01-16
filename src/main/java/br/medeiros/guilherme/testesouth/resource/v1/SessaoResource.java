@@ -1,10 +1,9 @@
 package br.medeiros.guilherme.testesouth.resource.v1;
 
 import br.medeiros.guilherme.testesouth.config.SwaggerConfig;
-import br.medeiros.guilherme.testesouth.dto.CadastrarSessaoDTO;
-import br.medeiros.guilherme.testesouth.dto.ErrorMessage;
-import br.medeiros.guilherme.testesouth.dto.SessaoDTO;
+import br.medeiros.guilherme.testesouth.dto.*;
 import br.medeiros.guilherme.testesouth.service.SessaoService;
+import br.medeiros.guilherme.testesouth.service.VotoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -29,6 +28,7 @@ import static org.springframework.http.HttpStatus.OK;
 public class SessaoResource {
 
     private final SessaoService sessaoService;
+    private final VotoService votoService;
 
     @ResponseStatus(CREATED)
     @ApiOperation(value = "Api de criação de sessão")
@@ -52,6 +52,12 @@ public class SessaoResource {
     public Page<SessaoDTO> findBy(@RequestParam(value = "pauta", required = false) String pauta,
                                   Pageable pageable) {
         return this.sessaoService.buscarSessao(pauta, pageable);
+    }
+
+    @ApiOperation(value = "Votar", response = VotoFinalizadoDTO.class)
+    @PostMapping("/{idSessao}/votar")
+    public VotoFinalizadoDTO votar(@PathVariable("idSessao") Long idSessao, @RequestBody VotoDTO votoDTO) {
+        return this.votoService.votar(idSessao, votoDTO);
     }
 
 }

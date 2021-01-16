@@ -62,7 +62,7 @@ public class SwaggerConfig {
     }
 
     private Predicate<String> paths() {
-        return PathSelectors.regex("/api/assembleia/v.*");
+        return PathSelectors.regex("/api/assembleia/v1.*");
     }
 
     public static class SwaggerTags {

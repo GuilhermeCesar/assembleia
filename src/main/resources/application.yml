@@ -24,9 +24,9 @@ spring:
 logging:
   level:
     #    root: FATAL
-    #    org.springframework: ERROR
+    org.springframework.data: ERROR
     br.medeiros.guilherme.testesouth: DEBUG
-#    org.hibernate: ERROR
+    org.hibernate: ERROR
 
 
 management:

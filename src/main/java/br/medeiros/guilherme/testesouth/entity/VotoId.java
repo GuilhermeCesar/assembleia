@@ -6,7 +6,6 @@ import java.io.Serializable;
 
 @Data
 @Builder
-@With
 @NoArgsConstructor
 @AllArgsConstructor
 public class VotoId implements Serializable {
