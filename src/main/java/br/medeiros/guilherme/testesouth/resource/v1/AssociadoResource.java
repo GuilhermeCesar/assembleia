@@ -40,7 +40,7 @@ public class AssociadoResource {
         return this.associadoService.cadastrarAssociado(cadastrarAssociadoDTO);
     }
 
-    @GetMapping(path = "/buscar")
+    @GetMapping(path = "/busca")
     @ApiOperation(value = "Filtra associados", response = Page.class)
     @ResponseStatus(OK)
     public Page<AssociadoDTO> findBy(@RequestParam(value = "cpf", required = false) String cpf,

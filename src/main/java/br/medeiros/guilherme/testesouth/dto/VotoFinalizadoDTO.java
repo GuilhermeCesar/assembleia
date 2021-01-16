@@ -13,9 +13,6 @@ import lombok.With;
 public class VotoFinalizadoDTO {
 
     String pauta;
-    Long sessaoId;
-    Long idAssociado;
-    Boolean votoAssociado;
     Long contagemSim;
     Long contagemNao;
 

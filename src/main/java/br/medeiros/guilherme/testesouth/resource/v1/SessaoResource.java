@@ -46,7 +46,7 @@ public class SessaoResource {
         return this.sessaoService.obterSessao(idSessao);
     }
 
-    @GetMapping(path = "/buscar")
+    @GetMapping(path = "/busca")
     @ApiOperation(value = "Filtra associados", response = Page.class)
     @ResponseStatus(OK)
     public Page<SessaoDTO> findBy(@RequestParam(value = "pauta", required = false) String pauta,
@@ -55,9 +55,14 @@ public class SessaoResource {
     }
 
     @ApiOperation(value = "Votar", response = VotoFinalizadoDTO.class)
-    @PostMapping("/{idSessao}/votar")
+    @PostMapping("/{idSessao}/voto")
     public VotoFinalizadoDTO votar(@PathVariable("idSessao") Long idSessao, @RequestBody VotoDTO votoDTO) {
         return this.votoService.votar(idSessao, votoDTO);
     }
 
+    @ApiOperation(value = "Votar", response = VotoFinalizadoDTO.class)
+    @GetMapping("/{idSessao}/voto/contagem")
+    public VotoFinalizadoDTO votar(@PathVariable("idSessao") Long idSessao) {
+        return this.votoService.contagemVotos(idSessao);
+    }
 }

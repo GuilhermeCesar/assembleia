@@ -48,13 +48,38 @@ public class VotoService {
         var votoFinalizadoDTO = contagemDeVotos(sessao);
 
         return votoFinalizadoDTO
-                .withPauta(sessao.getPauta())
-                .withVotoAssociado(voto.getAprovado())
-                .withSessaoId(sessao.getId())
-                .withIdAssociado(associado.getId());
+                .withPauta(sessao.getPauta());
     }
 
-    public VotoFinalizadoDTO contagemDeVotos(Sessao sessao) {
+    private void validarSeVotacao(br.medeiros.guilherme.testesouth.entity.Sessao sessao, br.medeiros.guilherme.testesouth.entity.Associado associado) {
+        final var votoId = VotoId
+                .builder()
+                .associadoId(associado.getId())
+                .sessaoId(sessao.getId())
+                .build();
+
+        if (LocalDateTime.now().isAfter(sessao.getFinalSessao())) {
+            throw new VotoException(HttpStatus.INTERNAL_SERVER_ERROR, "Sessão finalizada");
+        }
+
+        this.votoRepository.findById(votoId)
+                .ifPresent(votoSalvo -> {
+                    throw new VotoException(HttpStatus.CONFLICT, "Associado já votou nessa sessao");
+                });
+    }
+
+
+    public VotoFinalizadoDTO contagemVotos(Long idSessao){
+        final var sessao = this.sessaoRepository.findById(idSessao)
+                .orElseThrow(() -> new VotoException(NOT_FOUND, this.messageHelper.get(MessageHelper.ErrorCode.SESSAO_NAO_ENCONTRADA)));
+
+        var votoFinalizadoDTO = contagemDeVotos(sessao);
+
+        return votoFinalizadoDTO
+                .withPauta(sessao.getPauta());
+    }
+
+    private VotoFinalizadoDTO contagemDeVotos(Sessao sessao) {
         var votos = this.votoRepository.contaVotacao(sessao.getId());
 
         final var quantidadeSim = votos
@@ -77,20 +102,5 @@ public class VotoService {
                 .build();
     }
 
-    private void validarSeVotacao(br.medeiros.guilherme.testesouth.entity.Sessao sessao, br.medeiros.guilherme.testesouth.entity.Associado associado) {
-        final var votoId = VotoId
-                .builder()
-                .associadoId(associado.getId())
-                .sessaoId(sessao.getId())
-                .build();
 
-        if (LocalDateTime.now().isAfter(sessao.getFinalSessao())) {
-            throw new VotoException(HttpStatus.INTERNAL_SERVER_ERROR, "Sessão finalizada");
-        }
-
-        this.votoRepository.findById(votoId)
-                .ifPresent(votoSalvo -> {
-                    throw new VotoException(HttpStatus.CONFLICT, "Associado já votou nessa sessao");
-                });
-    }
 }

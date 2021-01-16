@@ -13,8 +13,6 @@ import java.util.List;
 
 public interface VotoRepository extends PagingAndSortingRepository<Voto, VotoId>, JpaSpecificationExecutor<Associado> {
 
-    Long countBySessaoIdAndAprovado(Long idSessao, Boolean aprovado);
-
     @Query("""
             select new br.medeiros.guilherme.testesouth.dto.ContagemVotacaoDTO(voto.aprovado, COUNT(voto.aprovado))
             FROM Voto as voto            
