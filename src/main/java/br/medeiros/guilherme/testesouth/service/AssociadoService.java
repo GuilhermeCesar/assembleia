@@ -7,11 +7,16 @@ import br.medeiros.guilherme.testesouth.entity.Associado;
 import br.medeiros.guilherme.testesouth.exception.AssociadoException;
 import br.medeiros.guilherme.testesouth.integration.CpfIntegration;
 import br.medeiros.guilherme.testesouth.repository.AssociadoRepository;
+import br.medeiros.guilherme.testesouth.repository.AssociadoSpecification;
 import feign.FeignException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -48,5 +53,23 @@ public class AssociadoService {
         } catch (FeignException.FeignClientException ex) {
             throw new AssociadoException(HttpStatus.NOT_FOUND, "Cpf inválido");
         }
+    }
+
+    public Page<AssociadoDTO> findSessao(final String cpf, final Long idAssociado, final String nome, Pageable pageable) {
+        final var asssociadoSpec = AssociadoSpecification
+                .builder()
+                .idAssociado(Optional.ofNullable(idAssociado))
+                .cpf(Optional.ofNullable(cpf))
+                .nome(Optional.ofNullable(nome))
+                .build();
+
+        final var associadoPage = this.associadoRepository.findAll(asssociadoSpec, pageable);
+
+        return associadoPage.map(associadoMap -> AssociadoDTO
+                .builder()
+                .cpf(associadoMap.getCpf())
+                .nome(associadoMap.getNome())
+                .id(associadoMap.getId())
+                .build());
     }
 }
