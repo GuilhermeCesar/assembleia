@@ -1,7 +1,6 @@
 package br.medeiros.guilherme.testesouth.resource.v1;
 
 import br.medeiros.guilherme.testesouth.config.SwaggerConfig;
-import br.medeiros.guilherme.testesouth.dto.AssociadoDTO;
 import br.medeiros.guilherme.testesouth.dto.CadastrarSessaoDTO;
 import br.medeiros.guilherme.testesouth.dto.ErrorMessage;
 import br.medeiros.guilherme.testesouth.dto.SessaoDTO;
@@ -43,7 +42,7 @@ public class SessaoResource {
     }
 
     @GetMapping(path = "{idSessao}")
-    public SessaoDTO get(@PathVariable("idSessao") Long idSessao){
+    public SessaoDTO get(@PathVariable("idSessao") Long idSessao) {
         return this.sessaoService.obterSessao(idSessao);
     }
 
@@ -51,7 +50,7 @@ public class SessaoResource {
     @ApiOperation(value = "Filtra associados", response = Page.class)
     @ResponseStatus(OK)
     public Page<SessaoDTO> findBy(@RequestParam(value = "pauta", required = false) String pauta,
-                                     Pageable pageable) {
+                                  Pageable pageable) {
         return this.sessaoService.buscarSessao(pauta, pageable);
     }
 

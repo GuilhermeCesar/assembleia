@@ -26,7 +26,7 @@ public class SessaoSpecification implements Specification<Sessao> {
     public Predicate toPredicate(Root<Sessao> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
         List<Predicate> predcs = new ArrayList<>();
 
-        this.pauta.ifPresent(pauta -> predcs.add(criteriaBuilder.equal(root.get("pauta"), pauta)));
+        this.pauta.ifPresent(p -> predcs.add(criteriaBuilder.equal(root.get("pauta"), p)));
 
         return criteriaBuilder.and(predcs.toArray(new Predicate[predcs.size()]));
     }
