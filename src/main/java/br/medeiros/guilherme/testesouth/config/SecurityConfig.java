@@ -32,6 +32,7 @@ public class SecurityConfig
                 .authorizeRequests()
                 .antMatchers("/api/assembleia/**").permitAll()
                 .antMatchers("/actuator/**").permitAll()
-                .anyRequest().permitAll();
+                .anyRequest()
+                .permitAll();
     }
 }

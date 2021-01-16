@@ -40,4 +40,9 @@ class SessaoServiceTest {
         var error = Assertions.assertThrows(SessaoException.class, () -> this.refinancingCreateService.obterSessao(idSessao));
         Assertions.assertEquals(HttpStatus.NOT_FOUND, error.getStatus());
     }
+
+    @Test
+    void inserirPauta(){
+
+    }
 }

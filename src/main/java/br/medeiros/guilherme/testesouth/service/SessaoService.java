@@ -44,6 +44,7 @@ public class SessaoService {
                 .idSessao(sessao.getId())
                 .inicio(sessao.getDataInicio())
                 .duracao(sessao.getDuracao())
+                .pauta(sessao.getPauta())
                 .build();
     }
 

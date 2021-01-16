@@ -2,8 +2,10 @@ package br.medeiros.guilherme.testesouth.dto;
 
 
 import br.medeiros.guilherme.testesouth.helper.DateDeserializer;
+import br.medeiros.guilherme.testesouth.helper.LocalDateTimeSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
 import lombok.Value;
@@ -34,6 +36,5 @@ public class CadastrarSessaoDTO {
             this.inicio = DateDeserializer.localDateTime(dataCompra);
             return this;
         }
-
     }
 }
