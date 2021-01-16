@@ -4,9 +4,14 @@ server:
 
 spring:
   application.name: assembleia-api
+  cloud.config.fail-fast: true
+  jackson:
+    serialization.WRITE_DATES_AS_TIMESTAMPS: false
+    deserialization.fail-on-unknown-properties: false
+    default-property-inclusion: NON_ABSENT
 
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: root
     url: jdbc:mysql://localhost:3306/assembleia
@@ -16,7 +21,24 @@ spring:
     username: admin
     password: admin
 
+logging:
+  level:
+    #    root: FATAL
+    #    org.springframework: ERROR
+    br.medeiros.guilherme.testesouth: DEBUG
+#    org.hibernate: ERROR
+
+
 management:
   endpoint:
     liquibase:
       enabled: true
+
+api:
+  base: 'https://user-info.herokuapp.com'
+  cpf: '/users/{cpf}'
+
+
+
+
+

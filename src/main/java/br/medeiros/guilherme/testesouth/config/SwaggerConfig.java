@@ -39,7 +39,10 @@ public class SwaggerConfig {
                 .apis(any())
                 .paths(paths())
                 .build()
-                .tags(new Tag(SwaggerTags.SESSAO, "Api de sessão"))
+                .tags(
+                        new Tag(SwaggerTags.SESSAO, "Api de sessão"),
+                        new Tag(SwaggerTags.ASSOCIADO, "Api de cadastro de associado")
+                )
                 .apiInfo(metaData());
     }
 
@@ -65,6 +68,7 @@ public class SwaggerConfig {
     public static class SwaggerTags {
 
         public static final String SESSAO = "Sessao";
+        public static final String ASSOCIADO = "Associado";
 
         private SwaggerTags() {
             super();

@@ -5,7 +5,6 @@
 <code>
 cd docker && docker-compose up
 </code>
-<li>Windows sem o hyperv não irão funcionar em localhost</li>
 <li> <a href="docker/docker-compose.yml">  Senhas dos bancos e rabbit estão no docker compose</a></li>
 <li> 
     <a href="https://drive.google.com/file/d/1he_W6Iim2sO9VlEE2qgSrvAjVIAE1-lj/view?usp=sharing">
@@ -14,7 +13,10 @@ cd docker && docker-compose up
         </label>
     </a>
 </li>
-
+<li>
+    <a>http://localhost:8080/api/assembleia/swagger-ui/index.html</a>
+</li>
+<li>Windows sem o hyperv não irão funcionar em localhost, utilizar o IP da VM</li>
 
 <h3 align="left">Languages and Tools:</h3>
 <p align="left"> 
@@ -22,4 +24,5 @@ cd docker && docker-compose up
         <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg" alt="java" width="40" height="40"/> </a> <a href="https://www.linux.org/" target="_blank"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/linux/linux-original.svg" alt="linux" width="40" height="40"/> </a> <a href="https://www.mysql.com/" target="_blank"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original-wordmark.svg" alt="mysql" width="40" height="40"/> </a> <a href="https://www.rabbitmq.com" target="_blank"> <img src="https://www.vectorlogo.zone/logos/rabbitmq/rabbitmq-icon.svg" alt="rabbitMQ" width="40" height="40"/> 
     </a> 
 </p>
+
 
