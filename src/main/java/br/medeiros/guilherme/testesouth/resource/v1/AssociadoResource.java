@@ -33,7 +33,7 @@ public class AssociadoResource {
     @ApiOperation(value = "Api de criação de associado")
     @ApiResponses({
             @ApiResponse(code = 200, message = "Sucesso", response = SessaoDTO.class),
-            @ApiResponse(code = 500, message = "Falha ao inserir sessão", response = ErrorMessage.class)
+            @ApiResponse(code = 500, message = "Falha ao inserir associado", response = ErrorMessage.class)
     })
     @PostMapping
     public void create(@Valid @RequestBody CadastrarAssociadoDTO cadastrarAssociadoDTO) {

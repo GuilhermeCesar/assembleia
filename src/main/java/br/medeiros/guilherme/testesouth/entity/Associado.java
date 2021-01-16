@@ -19,7 +19,8 @@ public class Associado {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
-
     @Column
     private String cpf;
+    @Column
+    private String nome;
 }
