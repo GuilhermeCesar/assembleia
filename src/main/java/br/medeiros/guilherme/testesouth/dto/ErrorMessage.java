@@ -2,6 +2,7 @@ package br.medeiros.guilherme.testesouth.dto;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+import io.swagger.annotations.ApiModel;
 import lombok.Builder;
 import lombok.Value;
 import lombok.With;
@@ -15,6 +16,7 @@ import static java.time.LocalDateTime.now;
 @With
 @JsonDeserialize(builder = ErrorMessage.JacksonBuilder.class)
 @Builder(builderClassName = "JacksonBuilder")
+@ApiModel(description = "Mensagem de erro padrão do sistema")
 public class ErrorMessage {
 
     @Builder.Default

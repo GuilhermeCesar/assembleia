@@ -4,6 +4,7 @@ package br.medeiros.guilherme.testesouth.dto;
 import br.medeiros.guilherme.testesouth.helper.DateDeserializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
 import lombok.Value;
@@ -17,13 +18,16 @@ import java.time.LocalTime;
 @With
 @JsonDeserialize(builder = CadastrarSessaoDTO.JacksonBuilder.class)
 @Builder(builderClassName = "JacksonBuilder")
+@ApiModel(description = "Cadastro da sessao")
 public class CadastrarSessaoDTO {
 
     @NotNull
+    @ApiModelProperty("${model.pauta}")
     String pauta;
     @NotNull
+    @ApiModelProperty("${model.inicio}")
     LocalDateTime inicio;
-    @ApiModelProperty(example = "10:10:10", value = "HH:mm:ss")
+    @ApiModelProperty(example = "10:10:10", value = "Duração da sessao em HH:mm:ss")
     LocalTime duracao;
 
     @JsonPOJOBuilder(withPrefix = "")

@@ -2,6 +2,7 @@ package br.medeiros.guilherme.testesouth.dto;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+import io.swagger.annotations.ApiModel;
 import lombok.Builder;
 import lombok.Value;
 import lombok.With;
@@ -10,6 +11,7 @@ import lombok.With;
 @With
 @JsonDeserialize(builder = AssociadoDTO.JacksonBuilder.class)
 @Builder(builderClassName = "JacksonBuilder")
+@ApiModel(description = "Dados do associado")
 public class AssociadoDTO {
 
     Long id;
