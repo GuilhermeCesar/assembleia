@@ -6,7 +6,8 @@
 cd docker && docker-compose up
 </code>
 <li> <a href="docker/docker-compose.yml">  Senhas dos bancos e rabbit estão no docker compose</a></li>
-<li>Windows sem o hyperv não irão funcionar em localhost, utilizar o IP da VM</li>
+<li>Windows sem o hyperv não irão funcionar em localhost, utilizar o IP da VM no arquivo <a href="src/main/resources/application.yml">application para banco e mensageria</a></li>
+
 <li>abrir no draw.io 
     <a href="https://drive.google.com/file/d/1he_W6Iim2sO9VlEE2qgSrvAjVIAE1-lj/view?usp=sharing">
         <label>       
