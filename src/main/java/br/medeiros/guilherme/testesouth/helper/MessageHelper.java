@@ -43,6 +43,10 @@ public class MessageHelper {
         SWAGGER_REFINANCING("swagger.refinancing"),
         SWAGGER_PLAN("swagger.plan"),
         SESSAO_NAO_ENCONTRADA("sessao.nao.encontrada"),
+        ERROR_CPF_INVALIDO("error.cpf.invalido"),
+        ERROR_ASSOCIADO_NAO_ENCONTRADO("error.associado.nao.encontrado"),
+        ERROR_SESSAO_FINALIZADA("error.sessao.finalizada"),
+        ERROR_ASSOCIADO_VOTOU_SESSAO("error.associado.votou.sessao"),
         ERROR_VALID_DATA("error.valid.data");
 
         private final String messageKey;

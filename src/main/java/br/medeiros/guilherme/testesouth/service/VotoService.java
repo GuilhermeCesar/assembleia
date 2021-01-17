@@ -3,6 +3,7 @@ package br.medeiros.guilherme.testesouth.service;
 import br.medeiros.guilherme.testesouth.dto.ContagemVotacaoDTO;
 import br.medeiros.guilherme.testesouth.dto.VotoDTO;
 import br.medeiros.guilherme.testesouth.dto.VotoFinalizadoDTO;
+import br.medeiros.guilherme.testesouth.entity.Associado;
 import br.medeiros.guilherme.testesouth.entity.Sessao;
 import br.medeiros.guilherme.testesouth.entity.Voto;
 import br.medeiros.guilherme.testesouth.entity.VotoId;
@@ -13,12 +14,11 @@ import br.medeiros.guilherme.testesouth.repository.SessaoRepository;
 import br.medeiros.guilherme.testesouth.repository.VotoRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 
-import static org.springframework.http.HttpStatus.NOT_FOUND;
+import static org.springframework.http.HttpStatus.*;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -35,7 +35,7 @@ public class VotoService {
                 .orElseThrow(() -> new VotoException(NOT_FOUND, this.messageHelper.get(MessageHelper.ErrorCode.SESSAO_NAO_ENCONTRADA)));
 
         final var associado = this.associadoRepository.findById(votoDTO.getIdAssociado())
-                .orElseThrow(() -> new VotoException(NOT_FOUND, "Associado não encontrado"));
+                .orElseThrow(() -> new VotoException(NOT_FOUND, this.messageHelper.get(MessageHelper.ErrorCode.ERROR_ASSOCIADO_NAO_ENCONTRADO)));
 
         validarSeVotacao(sessao, associado);
 
@@ -51,7 +51,7 @@ public class VotoService {
                 .withPauta(sessao.getPauta());
     }
 
-    private void validarSeVotacao(br.medeiros.guilherme.testesouth.entity.Sessao sessao, br.medeiros.guilherme.testesouth.entity.Associado associado) {
+    private void validarSeVotacao(Sessao sessao, Associado associado) {
         final var votoId = VotoId
                 .builder()
                 .associadoId(associado.getId())
@@ -59,17 +59,17 @@ public class VotoService {
                 .build();
 
         if (LocalDateTime.now().isAfter(sessao.getFinalSessao())) {
-            throw new VotoException(HttpStatus.INTERNAL_SERVER_ERROR, "Sessão finalizada");
+            throw new VotoException(INTERNAL_SERVER_ERROR, this.messageHelper.get(MessageHelper.ErrorCode.ERROR_SESSAO_FINALIZADA));
         }
 
         this.votoRepository.findById(votoId)
                 .ifPresent(votoSalvo -> {
-                    throw new VotoException(HttpStatus.CONFLICT, "Associado já votou nessa sessao");
+                    throw new VotoException(CONFLICT, this.messageHelper.get(MessageHelper.ErrorCode.ERROR_ASSOCIADO_VOTOU_SESSAO));
                 });
     }
 
 
-    public VotoFinalizadoDTO contagemVotos(Long idSessao){
+    public VotoFinalizadoDTO contagemVotos(Long idSessao) {
         final var sessao = this.sessaoRepository.findById(idSessao)
                 .orElseThrow(() -> new VotoException(NOT_FOUND, this.messageHelper.get(MessageHelper.ErrorCode.SESSAO_NAO_ENCONTRADA)));
 

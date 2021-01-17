@@ -17,6 +17,7 @@ cd docker && docker-compose up
     <a>http://localhost:8080/api/assembleia/swagger-ui/index.html</a>
 </li>
 <li>Windows sem o hyperv não irão funcionar em localhost, utilizar o IP da VM</li>
+<li>Rodar o spring na sua IDE, apenas a mensageria e o banco estão no docker</li>
 
 <h3 align="left">Languages and Tools:</h3>
 <p align="left"> 
