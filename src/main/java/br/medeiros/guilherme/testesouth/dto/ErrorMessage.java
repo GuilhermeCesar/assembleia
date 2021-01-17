@@ -1,7 +1,9 @@
 package br.medeiros.guilherme.testesouth.dto;
 
+import br.medeiros.guilherme.testesouth.helper.LocalDateTimeSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.swagger.annotations.ApiModel;
 import lombok.Builder;
 import lombok.Value;
@@ -20,6 +22,7 @@ import static java.time.LocalDateTime.now;
 public class ErrorMessage {
 
     @Builder.Default
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
     LocalDateTime timestamp = now();
     String error;
     String message;

@@ -34,14 +34,14 @@ public class SwaggerConfig {
     Docket api() {
         return new Docket(SWAGGER_2)
                 .groupName("V1")
-                    .directModelSubstitute(LocalTime.class, String.class)
+                .directModelSubstitute(LocalTime.class, String.class)
                 .select()
                 .apis(any())
                 .paths(paths())
                 .build()
                 .tags(
                         new Tag(SwaggerTags.SESSAO, this.messageHelper.get(SWAGGER_SESSAO)),
-                        new Tag(SwaggerTags.ASSOCIADO, "Api de cadastro de associado")
+                        new Tag(SwaggerTags.ASSOCIADO, this.messageHelper.get(SWAGGER_API_ASSOCIADO))
                 )
                 .apiInfo(metaData());
     }

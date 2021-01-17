@@ -13,9 +13,7 @@ import org.springframework.web.cors.CorsConfiguration;
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @RequiredArgsConstructor
-public class SecurityConfig
-        extends WebSecurityConfigurerAdapter
-{
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final AssembleiaEntryPoint assembleiaEntryPoint;
 

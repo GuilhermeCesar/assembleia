@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 
+import static br.medeiros.guilherme.testesouth.helper.MessageHelper.ErrorCode.*;
 import static org.springframework.http.HttpStatus.*;
 
 @Slf4j
@@ -32,10 +33,10 @@ public class VotoService {
 
     public VotoFinalizadoDTO votar(Long idSessao, VotoDTO votoDTO) {
         final var sessao = this.sessaoRepository.findById(idSessao)
-                .orElseThrow(() -> new VotoException(NOT_FOUND, this.messageHelper.get(MessageHelper.ErrorCode.ERROR_SESSAO_NAO_ENCONTRADA)));
+                .orElseThrow(() -> new VotoException(NOT_FOUND, this.messageHelper.get(ERROR_SESSAO_NAO_ENCONTRADA)));
 
         final var associado = this.associadoRepository.findById(votoDTO.getIdAssociado())
-                .orElseThrow(() -> new VotoException(NOT_FOUND, this.messageHelper.get(MessageHelper.ErrorCode.ERROR_ASSOCIADO_NAO_ENCONTRADO)));
+                .orElseThrow(() -> new VotoException(NOT_FOUND, this.messageHelper.get(ERROR_ASSOCIADO_NAO_ENCONTRADO)));
 
         validarSeVotacao(sessao, associado);
 
@@ -59,19 +60,19 @@ public class VotoService {
                 .build();
 
         if (LocalDateTime.now().isAfter(sessao.getFinalSessao())) {
-            throw new VotoException(INTERNAL_SERVER_ERROR, this.messageHelper.get(MessageHelper.ErrorCode.ERROR_SESSAO_FINALIZADA));
+            throw new VotoException(INTERNAL_SERVER_ERROR, this.messageHelper.get(ERROR_SESSAO_FINALIZADA));
         }
 
         this.votoRepository.findById(votoId)
                 .ifPresent(votoSalvo -> {
-                    throw new VotoException(CONFLICT, this.messageHelper.get(MessageHelper.ErrorCode.ERROR_ASSOCIADO_VOTOU_SESSAO));
+                    throw new VotoException(CONFLICT, this.messageHelper.get(ERROR_ASSOCIADO_VOTOU_SESSAO));
                 });
     }
 
 
     public VotoFinalizadoDTO contagemVotos(Long idSessao) {
         final var sessao = this.sessaoRepository.findById(idSessao)
-                .orElseThrow(() -> new VotoException(NOT_FOUND, this.messageHelper.get(MessageHelper.ErrorCode.ERROR_SESSAO_NAO_ENCONTRADA)));
+                .orElseThrow(() -> new VotoException(NOT_FOUND, this.messageHelper.get(ERROR_SESSAO_NAO_ENCONTRADA)));
 
         var votoFinalizadoDTO = contagemDeVotos(sessao);
 

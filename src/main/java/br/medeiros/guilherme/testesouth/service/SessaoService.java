@@ -15,6 +15,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+import static br.medeiros.guilherme.testesouth.helper.MessageHelper.ErrorCode.ERROR_SESSAO;
+import static br.medeiros.guilherme.testesouth.helper.MessageHelper.ErrorCode.ERROR_SESSAO_NAO_ENCONTRADA;
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
@@ -39,7 +41,7 @@ public class SessaoService {
 
             return getSessaoDTO(sessao);
         } catch (Exception ex) {
-            throw new SessaoException(INTERNAL_SERVER_ERROR, this.messageHelper.get(MessageHelper.ErrorCode.ERROR_SESSAO));
+            throw new SessaoException(INTERNAL_SERVER_ERROR, this.messageHelper.get(ERROR_SESSAO));
         }
     }
 
@@ -55,7 +57,7 @@ public class SessaoService {
 
     public SessaoDTO obterSessao(Long idSessao) {
         final var sessao = this.sessaoRepository.findById(idSessao)
-                .orElseThrow(() -> new SessaoException(NOT_FOUND, this.messageHelper.get(MessageHelper.ErrorCode.ERROR_SESSAO_NAO_ENCONTRADA)));
+                .orElseThrow(() -> new SessaoException(NOT_FOUND, this.messageHelper.get(ERROR_SESSAO_NAO_ENCONTRADA)));
 
         return getSessaoDTO(sessao);
     }

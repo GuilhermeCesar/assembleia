@@ -18,6 +18,7 @@ cd docker && docker-compose up
 
 <h2>Aplicação</h2>
 <li>Rodar o spring na sua IDE, apenas a mensageria e o banco estão no docker</li>
+<li>Utilizar branch master</li>
 <li>
     <a>http://localhost:8080/api/assembleia/swagger-ui/index.html</a>
 </li>

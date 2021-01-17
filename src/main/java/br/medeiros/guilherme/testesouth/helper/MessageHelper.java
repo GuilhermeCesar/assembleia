@@ -43,6 +43,7 @@ public class MessageHelper {
         SWAGGER_REFINANCING("swagger.refinancing"),
         SWAGGER_PLAN("swagger.plan"),
         SWAGGER_SESSAO("swagger.api.sessao"),
+        SWAGGER_API_ASSOCIADO("swagger.api.associado"),
         ERROR_SESSAO_NAO_ENCONTRADA("error.sessao.nao.encontrada"),
         ERROR_CPF_INVALIDO("error.cpf.invalido"),
         ERROR_ASSOCIADO_NAO_ENCONTRADO("error.associado.nao.encontrado"),

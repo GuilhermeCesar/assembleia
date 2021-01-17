@@ -60,13 +60,14 @@ public class ValidationHandler {
     @ResponseStatus(BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ErrorMessage handleValidationExceptions(MethodArgumentNotValidException ex) {
-        final var listErrors = ex.getBindingResult().getAllErrors().parallelStream()
+        var listErrors = ex.getBindingResult().getAllErrors().parallelStream()
                 .map(objectError -> this.messageHelper.get(ERROR_VALID_DATA, ((FieldError) objectError).getField(), (objectError).getDefaultMessage()))
                 .collect(Collectors.toList());
+        listErrors.add(ex.getMessage());
 
         return ErrorMessage
                 .builder()
-                .message(ex.getMessage())
+                .message(listErrors.get(0))
                 .error(ex.getClass().getName())
                 .errorsList(listErrors)
                 .build();
