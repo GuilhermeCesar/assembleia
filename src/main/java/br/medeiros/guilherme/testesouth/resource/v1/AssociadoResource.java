@@ -1,9 +1,11 @@
 package br.medeiros.guilherme.testesouth.resource.v1;
 
 import br.medeiros.guilherme.testesouth.config.SwaggerConfig;
-import br.medeiros.guilherme.testesouth.dto.*;
+import br.medeiros.guilherme.testesouth.dto.AssociadoDTO;
+import br.medeiros.guilherme.testesouth.dto.CadastrarAssociadoDTO;
+import br.medeiros.guilherme.testesouth.dto.ErrorMessage;
+import br.medeiros.guilherme.testesouth.dto.SessaoDTO;
 import br.medeiros.guilherme.testesouth.service.AssociadoService;
-import br.medeiros.guilherme.testesouth.service.SessaoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -30,7 +32,7 @@ public class AssociadoResource {
     private final AssociadoService associadoService;
 
     @ResponseStatus(CREATED)
-    @ApiOperation(value = "Api de criação de associado")
+    @ApiOperation(value = "${api.associado.criacao}")
     @ApiResponses({
             @ApiResponse(code = 200, message = "Sucesso", response = SessaoDTO.class),
             @ApiResponse(code = 500, message = "Falha ao inserir associado", response = ErrorMessage.class)
@@ -41,7 +43,11 @@ public class AssociadoResource {
     }
 
     @GetMapping(path = "/busca")
-    @ApiOperation(value = "Filtra associados", response = Page.class)
+    @ApiOperation(value = "${api.associado.filtro}")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Sucesso", response = Page.class),
+            @ApiResponse(code = 500, message = "Falha ao inserir associado", response = ErrorMessage.class)
+    })
     @ResponseStatus(OK)
     public Page<AssociadoDTO> findBy(@RequestParam(value = "cpf", required = false) String cpf,
                                      @RequestParam(value = "idSessao", required = false) Long idSessao,

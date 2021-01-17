@@ -39,7 +39,7 @@ public class SessaoService {
 
             return getSessaoDTO(sessao);
         } catch (Exception ex) {
-            throw new SessaoException(INTERNAL_SERVER_ERROR, this.messageHelper.get(MessageHelper.ErrorCode.SESSAO_ERROR));
+            throw new SessaoException(INTERNAL_SERVER_ERROR, this.messageHelper.get(MessageHelper.ErrorCode.ERROR_SESSAO));
         }
     }
 
@@ -53,10 +53,9 @@ public class SessaoService {
                 .build();
     }
 
-
     public SessaoDTO obterSessao(Long idSessao) {
         final var sessao = this.sessaoRepository.findById(idSessao)
-                .orElseThrow(() -> new SessaoException(NOT_FOUND, this.messageHelper.get(MessageHelper.ErrorCode.SESSAO_NAO_ENCONTRADA)));
+                .orElseThrow(() -> new SessaoException(NOT_FOUND, this.messageHelper.get(MessageHelper.ErrorCode.ERROR_SESSAO_NAO_ENCONTRADA)));
 
         return getSessaoDTO(sessao);
     }

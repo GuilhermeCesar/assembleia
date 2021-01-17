@@ -40,7 +40,7 @@ public class SwaggerConfig {
                 .paths(paths())
                 .build()
                 .tags(
-                        new Tag(SwaggerTags.SESSAO, "Api de sessão"),
+                        new Tag(SwaggerTags.SESSAO, this.messageHelper.get(SWAGGER_SESSAO)),
                         new Tag(SwaggerTags.ASSOCIADO, "Api de cadastro de associado")
                 )
                 .apiInfo(metaData());

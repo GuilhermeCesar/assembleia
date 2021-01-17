@@ -29,7 +29,7 @@ class SessaoServiceTest {
         final Long idSessao = 150L;
         final String message = "Sessão não encontrada";
 
-        Mockito.when(this.messageHelper.get(MessageHelper.ErrorCode.SESSAO_NAO_ENCONTRADA))
+        Mockito.when(this.messageHelper.get(MessageHelper.ErrorCode.ERROR_SESSAO_NAO_ENCONTRADA))
                 .thenReturn(message);
         Mockito.when(this.sessaoRepository.findById(idSessao))
                 .thenReturn(Optional.empty());

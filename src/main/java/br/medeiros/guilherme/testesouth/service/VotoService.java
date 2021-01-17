@@ -32,7 +32,7 @@ public class VotoService {
 
     public VotoFinalizadoDTO votar(Long idSessao, VotoDTO votoDTO) {
         final var sessao = this.sessaoRepository.findById(idSessao)
-                .orElseThrow(() -> new VotoException(NOT_FOUND, this.messageHelper.get(MessageHelper.ErrorCode.SESSAO_NAO_ENCONTRADA)));
+                .orElseThrow(() -> new VotoException(NOT_FOUND, this.messageHelper.get(MessageHelper.ErrorCode.ERROR_SESSAO_NAO_ENCONTRADA)));
 
         final var associado = this.associadoRepository.findById(votoDTO.getIdAssociado())
                 .orElseThrow(() -> new VotoException(NOT_FOUND, this.messageHelper.get(MessageHelper.ErrorCode.ERROR_ASSOCIADO_NAO_ENCONTRADO)));
@@ -71,7 +71,7 @@ public class VotoService {
 
     public VotoFinalizadoDTO contagemVotos(Long idSessao) {
         final var sessao = this.sessaoRepository.findById(idSessao)
-                .orElseThrow(() -> new VotoException(NOT_FOUND, this.messageHelper.get(MessageHelper.ErrorCode.SESSAO_NAO_ENCONTRADA)));
+                .orElseThrow(() -> new VotoException(NOT_FOUND, this.messageHelper.get(MessageHelper.ErrorCode.ERROR_SESSAO_NAO_ENCONTRADA)));
 
         var votoFinalizadoDTO = contagemDeVotos(sessao);
 

@@ -30,9 +30,9 @@ public class MessageHelper {
 
     @AllArgsConstructor
     @Getter
-    public  enum ErrorCode{
+    public enum ErrorCode {
 
-        SESSAO_ERROR("sessao.erro"),
+        ERROR_SESSAO("erro.sessao"),
         ERROR_AUTHENTICATION("error.authentication"),
         SWAGGER_DESCRIPTION("swagger.description"),
         SWAGGER_VERSION("swagger.version"),
@@ -42,7 +42,8 @@ public class MessageHelper {
         SWAGGER_NAME("swagger.name"),
         SWAGGER_REFINANCING("swagger.refinancing"),
         SWAGGER_PLAN("swagger.plan"),
-        SESSAO_NAO_ENCONTRADA("sessao.nao.encontrada"),
+        SWAGGER_SESSAO("swagger.api.sessao"),
+        ERROR_SESSAO_NAO_ENCONTRADA("error.sessao.nao.encontrada"),
         ERROR_CPF_INVALIDO("error.cpf.invalido"),
         ERROR_ASSOCIADO_NAO_ENCONTRADO("error.associado.nao.encontrado"),
         ERROR_SESSAO_FINALIZADA("error.sessao.finalizada"),

@@ -31,9 +31,9 @@ public class SessaoResource {
     private final VotoService votoService;
 
     @ResponseStatus(CREATED)
-    @ApiOperation(value = "Api de criação de sessão")
+    @ApiOperation(value = "${api.sessao.criacao}")
     @ApiResponses({
-            @ApiResponse(code = 200, message = "Sucesso", response = SessaoDTO.class),
+            @ApiResponse(code = 201, message = "Sucesso", response = SessaoDTO.class),
             @ApiResponse(code = 500, message = "Falha ao inserir sessão", response = ErrorMessage.class)
     })
     @PostMapping
@@ -41,27 +41,43 @@ public class SessaoResource {
         return this.sessaoService.criarSessao(sessaoDTO);
     }
 
-    @GetMapping(path = "{idSessao}")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Sucesso", response = SessaoDTO.class),
+            @ApiResponse(code = 404, message = "Sessão não encontrada", response = ErrorMessage.class)
+    })
+    @GetMapping(path = "/{idSessao}")
+    @ApiOperation(value = "${api.sessao.busca}")
+    @ResponseStatus(OK)
     public SessaoDTO get(@PathVariable("idSessao") Long idSessao) {
         return this.sessaoService.obterSessao(idSessao);
     }
 
     @GetMapping(path = "/busca")
-    @ApiOperation(value = "Filtra associados", response = Page.class)
+    @ApiOperation(value = "${api.sessao.busca}")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Sucesso", response = Page.class),
+            @ApiResponse(code = 404, message = "Sessão não encontrada", response = ErrorMessage.class)
+    })
     @ResponseStatus(OK)
     public Page<SessaoDTO> findBy(@RequestParam(value = "pauta", required = false) String pauta,
                                   Pageable pageable) {
         return this.sessaoService.buscarSessao(pauta, pageable);
     }
 
-    @ApiOperation(value = "Votar", response = VotoFinalizadoDTO.class)
+    @ApiOperation(value = "${api.sessao.votar}")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Sucesso", response = VotoFinalizadoDTO.class),
+            @ApiResponse(code = 404, message = "Sessão não encontrada", response = ErrorMessage.class)
+    })
     @PostMapping("/{idSessao}/voto")
+    @ResponseStatus(CREATED)
     public VotoFinalizadoDTO votar(@PathVariable("idSessao") Long idSessao, @RequestBody VotoDTO votoDTO) {
         return this.votoService.votar(idSessao, votoDTO);
     }
 
-    @ApiOperation(value = "Votar", response = VotoFinalizadoDTO.class)
+    @ApiOperation(value = "${api.sessao.buscar.voto}", response = VotoFinalizadoDTO.class)
     @GetMapping("/{idSessao}/voto/contagem")
+    @ResponseStatus(OK)
     public VotoFinalizadoDTO votar(@PathVariable("idSessao") Long idSessao) {
         return this.votoService.contagemVotos(idSessao);
     }
