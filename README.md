@@ -1,12 +1,14 @@
 <h2>Setup</h2>
 <li>Utilizar java 15</li>
 <li>Tenha o docker previamente instalado na sua máquina</li>
-<li>Para rodar execute o seguinte comando na raiz do projeto</li>
+<li>Você deve ter o mavem previamento instalado na sua máquina</li>
+
+<li> <a href="docker/docker-compose.yml">  Senhas dos bancos e rabbit estão no docker compose</a></li>
+<li>Windows sem o hyperv não irão funcionar em localhost, utilizar o IP da VM no arquivo <a href="src/main/resources/application.yml">application para banco e mensageria</a></li>
+<li>Para rodar o banco e rabbit execute o seguinte comando na raiz do projeto</li>
 <code>
 cd docker && docker-compose up
 </code>
-<li> <a href="docker/docker-compose.yml">  Senhas dos bancos e rabbit estão no docker compose</a></li>
-<li>Windows sem o hyperv não irão funcionar em localhost, utilizar o IP da VM no arquivo <a href="src/main/resources/application.yml">application para banco e mensageria</a></li>
 
 <li>abrir no draw.io 
     <a href="https://drive.google.com/file/d/1he_W6Iim2sO9VlEE2qgSrvAjVIAE1-lj/view?usp=sharing">
@@ -15,6 +17,7 @@ cd docker && docker-compose up
         </label>
     </a>
 </li>
+<li>Na Raiz do projeto <code>mvn clean install</code></li>
 
 <h2>Aplicação</h2>
 <li>Rodar o spring na sua IDE, apenas a mensageria e o banco estão no docker</li>
