@@ -1,4 +1,4 @@
-<h2 align="left">Languages and Tools:</h2>
+<h2>Setup</h2>
 <li>Utilizar java 15</li>
 <li>Tenha o docker previamente instalado na sua máquina</li>
 <li>Para rodar execute o seguinte comando na raiz do projeto</li>
@@ -6,18 +6,21 @@
 cd docker && docker-compose up
 </code>
 <li> <a href="docker/docker-compose.yml">  Senhas dos bancos e rabbit estão no docker compose</a></li>
-<li> 
+<li>Windows sem o hyperv não irão funcionar em localhost, utilizar o IP da VM</li>
+<li>abrir no draw.io 
     <a href="https://drive.google.com/file/d/1he_W6Iim2sO9VlEE2qgSrvAjVIAE1-lj/view?usp=sharing">
         <label>       
             Modelo ER    
         </label>
     </a>
 </li>
+
+<h2>Aplicação</h2>
+<li>Rodar o spring na sua IDE, apenas a mensageria e o banco estão no docker</li>
 <li>
     <a>http://localhost:8080/api/assembleia/swagger-ui/index.html</a>
 </li>
-<li>Windows sem o hyperv não irão funcionar em localhost, utilizar o IP da VM</li>
-<li>Rodar o spring na sua IDE, apenas a mensageria e o banco estão no docker</li>
+
 
 <h3 align="left">Languages and Tools:</h3>
 <p align="left"> 
